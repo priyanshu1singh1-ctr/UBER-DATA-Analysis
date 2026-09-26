@@ -6,7 +6,8 @@ An end-to-end SQL project on a real 2016 ride-trip log: from a messy raw export 
 
 
 
-<img width="1024" height="585" alt="image" src="https://github.com/user-attachments/assets/70e390d4-5e1e-4406-9b8c-6de50744c888" />
+<img width="586" height="497" alt="image" src="https://github.com/user-attachments/assets/fce8fe1a-e03f-4c24-9178-2efd8fa93f98" />
+
 
 
 
@@ -33,12 +34,18 @@ Each question was run against the cleaned uber_trips table.
 Q1. Trip count and mileage, Business vs Personal
 <img width="547" height="87" alt="image" src="https://github.com/user-attachments/assets/8fa828ea-b05c-41a1-b040-df03dc5da570" />
 
+
+
+
 SELECT category, COUNT(*) AS total_trips, ROUND(SUM(miles),1) AS total_miles,
 ROUND(AVG(miles),2) AS avg_miles_per_trip
 FROM uber_trips GROUP BY category ORDER BY total_trips DESC;
 
 
 Insight: Business trips are 92% of volume and run ~22% longer on average than Personal trips and mileage reimbursement exposure is concentrated almost entirely in Business use.
+
+
+
 
 
 Q2. Category's share of trips vs. share of miles
@@ -60,8 +67,11 @@ Insight: Business's share of miles (93.6%) slightly exceeds its share of trips (
 
 
 
+
+
 Q3. Business mileage by purpose, and the missing-purpose gap
 <img width="502" height="256" alt="image" src="https://github.com/user-attachments/assets/f70bb72f-89cd-4106-87a3-670aec40c684" />
+
 
 SELECT
     COALESCE(purpose, 'Not Specified')       AS purpose,
@@ -79,6 +89,9 @@ Insight: 45% of Business trips and the single largest mileage block — carry no
 
 
 
+
+
+
 Q4. Top 10 start locations
 <img width="496" height="417" alt="image" src="https://github.com/user-attachments/assets/fbbf3301-e481-4e56-90f9-335624a800e0" />
 
@@ -93,6 +106,9 @@ LIMIT 10;
 
 
 Insight: "Unknown Location" would rank as the #2 pickup point if taken at face value — 11% of all trips have no real start location logged. Any location-based report must filter this out explicitly (as every later query here does), or it silently distorts the ranking.
+
+
+
 
 
 
@@ -118,6 +134,9 @@ ORDER BY trips DESC
 
 
 
+
+
+
 Q6. Round trips vs. one-way
 <img width="505" height="81" alt="image" src="https://github.com/user-attachments/assets/c1632c60-9b3f-4593-8ebc-8ac8944feb5a" />
 
@@ -130,6 +149,9 @@ FROM uber_trips
 GROUP BY trip_type
 
 Insight: One in five trips is a same-location round trip, and — as expected — they run ~25% shorter than one-way trips, a useful sanity check that the distance data behaves logically
+
+
+
 
 
 
@@ -146,6 +168,9 @@ GROUP BY category
 
 
 
+
+
+
 Q8. The single longest trip
 <img width="960" height="112" alt="image" src="https://github.com/user-attachments/assets/bc9634b2-e808-4f1b-9f5f-999df519885e" />
 
@@ -153,6 +178,11 @@ SELECT trip_id, start_datetime, start_location, stop_location, miles, purpose
 FROM uber_trips
 ORDER BY miles DESC
 LIMIT 1;
+
+
+
+
+
 
 
 Q9. Day-of-week pattern
@@ -170,6 +200,11 @@ GROUP BY day_of_week, day_type
 ORDER BY trips DESC;
 
 Friday is the busiest day (167 trips), narrowly ahead of Sunday (165) — weekdays account for 70% of all trips (703 of 998) vs. 30% on weekends, but average trip distance is similar across both (≈11.3 vs ≈11.0 miles), so the weekday/weekend split shows up in volume, not trip length.
+
+
+
+
+
 
 
 
@@ -194,6 +229,10 @@ Insight: Afternoon is the peak Business window (39% of all Business trips) and t
 
 
 
+
+
+
+
 Q11. Top 3 locations by mileage, per category (RANK() OVER PARTITION BY)
 <img width="625" height="175" alt="image" src="https://github.com/user-attachments/assets/8c53d1ad-7bdc-4b7c-a345-cbbdda029b70" />
 
@@ -213,6 +252,11 @@ WHERE mileage_rank <= 3
 ORDER BY category, mileage_rank;
 
 
+
+
+
+
+
 Q12. Running (cumulative) Business mileage — reimbursement tracking
 
 SELECT
@@ -229,7 +273,10 @@ ORDER BY start_datetime;
 
 
 
-<img width="768" height="768" alt="image" src="https://github.com/user-attachments/assets/4a49ee39-a55a-4f96-8429-4dd4a201301a" />
+<img width="637" height="582" alt="image" src="https://github.com/user-attachments/assets/5939ebfb-5cf8-4d81-9d6d-95417451f4a5" />
+
+
+
 
 
 
@@ -244,6 +291,9 @@ ORDER BY start_datetime;
 
 
 
+
+
+<img width="987" height="570" alt="image" src="https://github.com/user-attachments/assets/72162b6b-cf5f-4596-8191-7133b6bae3c3" />
 
 
 

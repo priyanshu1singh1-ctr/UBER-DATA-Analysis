@@ -93,6 +93,8 @@ Insight: 45% of Business trips and the single largest mileage block — carry no
 
 
 Q4. Top 10 start locations
+
+
 <img width="496" height="417" alt="image" src="https://github.com/user-attachments/assets/fbbf3301-e481-4e56-90f9-335624a800e0" />
 
 SELECT
@@ -138,6 +140,8 @@ ORDER BY trips DESC
 
 
 Q6. Round trips vs. one-way
+
+
 <img width="505" height="81" alt="image" src="https://github.com/user-attachments/assets/c1632c60-9b3f-4593-8ebc-8ac8944feb5a" />
 
 
@@ -156,6 +160,9 @@ Insight: One in five trips is a same-location round trip, and — as expected �
 
 
 Q7. Distance profile by category
+
+
+
 <img width="587" height="85" alt="image" src="https://github.com/user-attachments/assets/2faf44ca-3efd-4adc-ac9b-c52824eebe02" />
 
 SELECT
@@ -172,6 +179,8 @@ GROUP BY category
 
 
 Q8. The single longest trip
+
+
 <img width="960" height="112" alt="image" src="https://github.com/user-attachments/assets/bc9634b2-e808-4f1b-9f5f-999df519885e" />
 
 SELECT trip_id, start_datetime, start_location, stop_location, miles, purpose
@@ -209,6 +218,9 @@ Friday is the busiest day (167 trips), narrowly ahead of Sunday (165) — weekda
 
 
 Q10. Peak time-of-day for Business trips
+
+
+
 <img width="356" height="127" alt="image" src="https://github.com/user-attachments/assets/fb890ca2-95e8-49a7-9180-926de159a0b2" />
 
 SELECT
@@ -234,6 +246,8 @@ Insight: Afternoon is the peak Business window (39% of all Business trips) and t
 
 
 Q11. Top 3 locations by mileage, per category (RANK() OVER PARTITION BY)
+
+
 <img width="625" height="175" alt="image" src="https://github.com/user-attachments/assets/8c53d1ad-7bdc-4b7c-a345-cbbdda029b70" />
 
 WITH loc_miles AS (
